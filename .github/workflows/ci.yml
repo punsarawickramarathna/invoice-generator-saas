@@ -1,80 +1,36 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev]
+    branches:
+      - main
 
 jobs:
-  test:
-    name: Matrix Test on Node.js
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
-
+        node-version: [16.x, 18.x]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Security Check
+        run: npm audit --audit-level=high || true
 
-      - name: Run unit tests (if exists)
-        run: |
-          if npm run | grep -q "test:unit"; then
-            npm run test:unit
-          else
-            echo "No unit test script found."
-          fi
-
-      - name: Run integration tests (if exists)
-        run: |
-          if npm run | grep -q "test:integration"; then
-            npm run test:integration
-          else
-            echo "No integration test script found."
-          fi
-
-      - name: Run E2E tests (if exists)
-        run: |
-          if npm run | grep -q "test:e2e"; then
-            npm run test:e2e
-          else
-            echo "No E2E test script found."
-          fi
-
-      - name: Upload test reports (optional)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-reports-${{ matrix.node-version }}
-          path: reports/
-        continue-on-error: true
-
-  audit:
-    name: Security Audit
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          node-version: 18.x
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run audit check
-        run: |
-          npm audit --omit=dev --json > audit.json || echo "npm audit failed, continuing..."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # or ./docs if you move files there
