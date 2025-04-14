@@ -1,0 +1,12 @@
+{
+  "name": "clone",
+  "version": "1.0.0",
+  "main": "index.js",
+ "scripts": {
+  "test": "echo \"No tests defined yet\""
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

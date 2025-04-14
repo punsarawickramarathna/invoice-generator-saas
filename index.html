@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🧾 Invoice Generator</h1>
+
+    <form id="invoiceForm">
+      <input type="text" id="clientName" placeholder="Client Name" required />
+      <input type="text" id="description" placeholder="Service Description" required />
+      <input type="number" id="hours" placeholder="Hours Worked" required />
+      <input type="number" id="rate" placeholder="Hourly Rate ($)" required />
+      <button type="submit">Generate Invoice</button>
+    </form>
+
+    <div id="invoiceResult" class="invoice hidden">
+      <div class="invoice-header">
+        <h2>Lotus Lagoon Freelance Services</h2>
+        <p>123 Cloud Lane, DevCity</p>
+        <p><strong>Date:</strong> <span id="invoiceDate"></span></p>
+      </div>
+      <hr>
+      <div class="invoice-body">
+        <p><strong>Billed To:</strong> <span id="displayClient"></span></p>
+        <p><strong>Service:</strong> <span id="displayDesc"></span></p>
+        <p><strong>Hours:</strong> <span id="displayHours"></span> hrs</p>
+        <p><strong>Rate:</strong> $<span id="displayRate"></span> /hr</p>
+        <p><strong>Total:</strong> $<span id="displayTotal"></span></p>
+      </div>
+      <hr>
+      <p class="thanks">Thank you for your business!</p>
+    </div>
+
+    <button id="downloadBtn" class="hidden">📥 Download Invoice</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
