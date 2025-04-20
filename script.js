@@ -23,13 +23,17 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const element = document.getElementById("invoiceResult");
-  const opt = {
-    margin: 1,
-    filename: 'invoice.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
 
-  html2pdf().set(opt).from(element).save();
+  // Delay to ensure full rendering before PDF generation
+  setTimeout(() => {
+    const opt = {
+      margin: 1,
+      filename: 'invoice.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  }, 300); // Delay to ensure invoice content is fully rendered
 });
