@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Invoice Generator API
+  description: Mock API for storing and retrieving invoices
+  version: 1.0.0
+
+paths:
+  /invoices:
+    get:
+      summary: Get all invoices
+      responses:
+        '200':
+          description: A list of invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+    post:
+      summary: Create a new invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '201':
+          description: Invoice created successfully
+
+components:
+  schemas:
+    Invoice:
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: John Doe
+        description:
+          type: string
+          example: Web Development Services
+        hours:
+          type: number
+          example: 12
+        rate:
+          type: number
+          example: 25
+        total:
+          type: number
+          example: 300
