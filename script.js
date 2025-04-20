@@ -8,7 +8,7 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
   const total = (hours * rate).toFixed(2);
   const date = new Date().toLocaleDateString();
 
-  // Fill in the invoice
+  // Fill invoice values
   document.getElementById("displayClient").textContent = clientName;
   document.getElementById("displayDesc").textContent = description;
   document.getElementById("displayHours").textContent = hours;
@@ -24,16 +24,19 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const element = document.getElementById("invoiceResult");
 
-  // Delay to ensure full rendering before PDF generation
+  // Ensure it's visible before PDF generation
+  element.classList.remove("hidden");
+
+  // Wait briefly for rendering
   setTimeout(() => {
     const opt = {
-      margin: 1,
+      margin: 0.5,
       filename: 'invoice.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save();
-  }, 300); // Delay to ensure invoice content is fully rendered
+  }, 200); // small delay to allow DOM update
 });
