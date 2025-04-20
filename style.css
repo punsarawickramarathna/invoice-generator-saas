@@ -19,6 +19,14 @@ body {
     color: #444;
   }
   
+  .tagline {
+    font-size: 1.2rem;
+    color: #4CAF50;
+    font-style: italic;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
   form {
     display: flex;
     flex-direction: column;
