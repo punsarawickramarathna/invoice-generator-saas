@@ -38,7 +38,7 @@ Verify that our app works as expected.
 
 ---
 
-### ✅ Step 3: If This Version Works Fine
+### Step 3: If This Version Works Fine
 
 #### Create a Recovery Branch
 
