@@ -1,18 +1,32 @@
-### Bug Description
-A clear and concise description of the problem.
+# Bug Report - PDF Invoice Not Showing Client Name
 
-### Steps to Reproduce
-1. Go to '...'
-2. Click on '...'
-3. See error
+## Summary
+The generated PDF invoice only displays the header and address, but omits client details and service information.
 
-### Expected Behavior
-What did you expect to happen?
+## Steps to Reproduce
+1. Go to the deployed invoice generator page
+2. Fill out the invoice form with all fields
+3. Click "Generate Invoice"
+4. Click "Download Invoice"
+5. Open the downloaded PDF
 
-### Screenshots
-If applicable, add screenshots.
+## Expected Behavior
+The PDF should contain the full invoice:
+- Client Name
+- Service Description
+- Hours and Rate
+- Total Amount
 
-### Environment
-- OS: [e.g. Windows 10]
-- Browser [e.g. Chrome 120]
-- Version [e.g. v1.0.0]
+## Actual Behavior
+Only the header "Lotus Lagoon Freelance Services" and address are visible. All dynamic content is missing.
+
+## Environment
+- OS: Ubuntu 22.04
+- Browser: Chrome 123.0
+- Deployment: GitHub Pages (main branch)
+
+## Additional Notes
+The issue seems to be caused by `html2pdf()` being called before the invoice is actually visible/rendered in the DOM.
+
+## Suggested Fix
+Delay the PDF generation using `setTimeout()` or ensure `invoiceResult.classList.remove('hidden')` completes before passing to `html2pdf()`.
