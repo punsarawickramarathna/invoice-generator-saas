@@ -1,23 +1,26 @@
-## 📝 Description
-Please explain the changes you made and why.
+# Pull Request Template
 
-## ✅ Checklist
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings or errors
+## Description
 
-## 🚀 Type of Change
-- [ ] Bug fix 🐛
-- [ ] New feature ✨
-- [ ] Breaking change 💥
-- [ ] Documentation update 📝
+This pull request adds a new feature to export the generated invoice data as a downloadable PDF using `html2pdf.js`. The invoice is dynamically filled based on the form inputs, and the PDF file includes all invoice details like client name, service, hours, rate, and total.
 
-## 📸 Screenshots (if applicable)
+Fixes #14
 
-## 🧪 How to Test
-Explain how to test your changes.
+## Type of Change
 
-## 🤝 Related Issues
-Link to any related issues (e.g. `Fixes #123`)
+- [x] New feature (non-breaking change that adds functionality)
+- [ ] Bug fix
+- [ ] Documentation update
+- [ ] Code refactor or optimization
+- [ ] Performance improvement
+- [ ] Test case addition or update
+- [ ] Other
+
+## Checklist
+
+- [x] I have tested the changes locally
+- [x] I have updated the documentation where necessary
+- [x] I have linked related issues or discussions
+- [x] I have reviewed my code for clean structure and naming
+- [x] My changes generate no new warnings or errors
+
