@@ -8,7 +8,6 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
   const total = (hours * rate).toFixed(2);
   const date = new Date().toLocaleDateString();
 
-  // Fill invoice values
   document.getElementById("displayClient").textContent = clientName;
   document.getElementById("displayDesc").textContent = description;
   document.getElementById("displayHours").textContent = hours;
@@ -16,7 +15,7 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
   document.getElementById("displayTotal").textContent = total;
   document.getElementById("invoiceDate").textContent = date;
 
-  // Show invoice & download button
+ 
   document.getElementById("invoiceResult").classList.remove("hidden");
   document.getElementById("downloadBtn").classList.remove("hidden");
 });
@@ -24,10 +23,10 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const element = document.getElementById("invoiceResult");
 
-  // Ensure it's visible before PDF generation
+ 
   element.classList.remove("hidden");
 
-  // Wait briefly for rendering
+
   setTimeout(() => {
     const opt = {
       margin: 0.5,
@@ -38,5 +37,5 @@ document.getElementById("downloadBtn").addEventListener("click", function () {
     };
 
     html2pdf().set(opt).from(element).save();
-  }, 200); // small delay to allow DOM update
+  }, 200); 
 });
